@@ -5,7 +5,7 @@
 
         <h5 class="text-lg">Totale dei prodotti in tabella: {{ count($aperitifs) }}</h5>
 
-        <table class="table-auto border-separate border-spacing-2 shadow mt-5">
+        <table class="table-auto bg-white border-separate border-spacing-2 shadow mt-5">
             <thead>
                 <tr>
                     <th>#</th>
