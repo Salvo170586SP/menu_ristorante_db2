@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('admin.desserts.index')" :active="request()->routeIs('admin.desserts.index')">
                         {{ __('Dessert') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.long_drinks.index')" :active="request()->routeIs('admin.long_drinks.index')">
+                        {{ __('Long Drinks') }}
+                    </x-nav-link>
                 </div>
             </div>
 
