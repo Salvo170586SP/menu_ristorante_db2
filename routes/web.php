@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AperitifController;
+use App\Http\Controllers\DessertController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,4 +36,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
     //Aperitivi
     Route::resource('/aperitifs',  AperitifController::class);
+    
+    //Desserts
+    Route::resource('/desserts',  DessertController::class);
 });
