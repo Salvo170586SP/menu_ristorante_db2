@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AperitifController;
 use App\Http\Controllers\DessertController;
+use App\Http\Controllers\LongDrinkController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,4 +40,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     
     //Desserts
     Route::resource('/desserts',  DessertController::class);
+
+    //LongDrinks
+    Route::resource('/long_drinks',  LongDrinkController::class);
 });
