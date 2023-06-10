@@ -1,17 +1,17 @@
 <x-app-layout>
     <div class="container mx-auto flex flex-col justify-center align-center">
 
-        <h1 class="text-3xl my-9">Crea Aperitivo</h1>
+        <h1 class="text-3xl my-9">Crea Dessert</h1>
 
         <div class="flex justify-between align-center py-5">
-            <a href="{{ route('admin.aperitifs.index') }}" class="rounded-lg shadow text-white py-3 px-5  bg-gray-600 mx-2">Torna alla lista</a>
+            <a href="{{ route('admin.desserts.index') }}" class="rounded-lg shadow text-white py-3 px-5  bg-gray-600 mx-2">Torna alla lista</a>
         </div>
         @include('includes.errorsAlert')
         <div class="mx-auto ">
-            <form action="{{ route('admin.aperitifs.store') }}" method="post" class="flex flex-col align-center justify-center">
+            <form action="{{ route('admin.desserts.store') }}" method="post" class="flex flex-col align-center justify-center">
                 @csrf
 
-                @include('admin.aperitifs.form')
+                @include('admin.desserts.form')
 
                 <div class="text-end">
                     <button class="rounded-lg shadow text-white py-3 px-5 bg-gray-600 m-3">Crea</button>
