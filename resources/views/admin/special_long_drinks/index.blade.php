@@ -7,7 +7,7 @@
             <h5 class="text-lg">Totale dei prodotti in tabella: {{ count($special_long_drinks) }}</h5>
             <a href="{{ route('admin.special_long_drinks.create') }}" class="rounded-lg shadow text-white py-3 px-5  bg-gray-600 mx-2">Crea</a>
         </div>
-
+        @include('includes.alert')
         <table class="table-auto bg-white border-separate border-spacing-2 shadow mt-5">
             <thead>
                 <tr>

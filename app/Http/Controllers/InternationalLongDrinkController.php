@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\InternationalLongDrink;
+use Exception;
 use Illuminate\Http\Request;
 
 class InternationalLongDrinkController extends Controller
@@ -22,7 +23,7 @@ class InternationalLongDrinkController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.international_long_drinks.create');
     }
 
     /**
@@ -30,7 +31,25 @@ class InternationalLongDrinkController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|unique:aperitifs',
+        ], [
+            'name.required' => 'Il nome è richiesto',
+            'name.unique' => 'Il nome è già esistente',
+        ]);
+
+        try {
+            $international_long_drink = new InternationalLongDrink();
+            $international_long_drink->name = $request->name;
+            $international_long_drink->description = $request->description;
+            $international_long_drink->price = $request->price;
+            $international_long_drink->save();
+
+            return redirect()->route('admin.international_long_drinks.index')->with('message', "$international_long_drink->name creato con successo");;
+        } catch (Exception $e) {
+
+            return redirect()->route('admin.international_long_drinks.index')->with('message', 'Errore nella creazione');
+        }
     }
 
     /**
@@ -38,7 +57,7 @@ class InternationalLongDrinkController extends Controller
      */
     public function show(InternationalLongDrink $internationalLongDrink)
     {
-        //
+        return view('admin.international_long_drinks.show', compact('internationalLongDrink'));
     }
 
     /**
@@ -46,7 +65,7 @@ class InternationalLongDrinkController extends Controller
      */
     public function edit(InternationalLongDrink $internationalLongDrink)
     {
-        //
+        return view('admin.international_long_drinks.edit', compact('internationalLongDrink'));
     }
 
     /**
@@ -54,7 +73,24 @@ class InternationalLongDrinkController extends Controller
      */
     public function update(Request $request, InternationalLongDrink $internationalLongDrink)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+        ], [
+            'name.required' => 'Il nome è richiesto',
+        ]);
+
+        try {
+            $internationalLongDrink->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'price' => $request->price,
+            ]);
+
+            return redirect()->route('admin.international_long_drinks.index')->with('message', "$internationalLongDrink->name modificato con successo");
+        } catch (Exception $e) {
+
+            return redirect()->route('admin.international_long_drinks.index')->with('message', 'Errore nella modifica');
+        }
     }
 
     /**
@@ -62,6 +98,8 @@ class InternationalLongDrinkController extends Controller
      */
     public function destroy(InternationalLongDrink $internationalLongDrink)
     {
-        //
+        $internationalLongDrink->delete();
+
+        return back()->with('message', "$internationalLongDrink->name eliminato con successo");
     }
 }
