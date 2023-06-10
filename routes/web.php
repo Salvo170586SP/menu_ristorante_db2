@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AperitifController;
 use App\Http\Controllers\DessertController;
+use App\Http\Controllers\InternationalLongDrinkController;
 use App\Http\Controllers\LongDrinkController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SpecialLongDrinkController;
@@ -47,4 +48,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     
     //SpecialLongDrinks
     Route::resource('/special_long_drinks',  SpecialLongDrinkController::class);
+
+    //InternationalLongDrinks
+    Route::resource('/international_long_drinks',  InternationalLongDrinkController::class);
 });

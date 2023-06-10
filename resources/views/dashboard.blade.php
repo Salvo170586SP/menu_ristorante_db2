@@ -19,6 +19,7 @@
                         <a href="{{ route('admin.desserts.index') }}" class="bg-slate-400 hover:text-white  text-white p-2 rounded-lg">{{ __('Desserts') }}</a>
                         <a href="{{ route('admin.long_drinks.index') }}" class="bg-slate-400 hover:text-white  text-white p-2 rounded-lg">{{ __('Long Drinks') }}</a>
                         <a href="{{ route('admin.special_long_drinks.index') }}" class="bg-slate-400 hover:text-white  text-white p-2 rounded-lg">{{ __('Special Long Drinks') }}</a>
+                        <a href="{{ route('admin.international_long_drinks.index') }}" class="bg-slate-400 hover:text-white  text-white p-2 rounded-lg">{{ __('International Long Drinks') }}</a>
                     </div>
                 </div>
             </div>
