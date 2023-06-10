@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aperitif;
+use Exception;
 use Illuminate\Http\Request;
 
 class AperitifController extends Controller
@@ -22,7 +23,7 @@ class AperitifController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.aperitifs.create');
     }
 
     /**
@@ -30,7 +31,25 @@ class AperitifController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|unique:aperitifs',
+        ], [
+            'name.required' => 'Il nome è richiesto',
+            'name.unique' => 'Il nome è già esistente',
+        ]);
+
+        try {
+            $aperitif = new Aperitif();
+            $aperitif->name = $request->name;
+            $aperitif->description = $request->description;
+            $aperitif->price = $request->price;
+            $aperitif->save();
+
+            return redirect()->route('admin.aperitifs.index')->with('message', "$aperitif->name creato con successo");;
+        } catch (Exception $e) {
+
+            return redirect()->route('admin.aperitifs.index')->with('message', 'Errore nella creazione');
+        }
     }
 
     /**
@@ -38,7 +57,7 @@ class AperitifController extends Controller
      */
     public function show(Aperitif $aperitif)
     {
-        //
+        return view('admin.aperitifs.show', compact('aperitif'));
     }
 
     /**
@@ -46,7 +65,7 @@ class AperitifController extends Controller
      */
     public function edit(Aperitif $aperitif)
     {
-        //
+        return view('admin.aperitifs.edit', compact('aperitif'));
     }
 
     /**
@@ -54,7 +73,24 @@ class AperitifController extends Controller
      */
     public function update(Request $request, Aperitif $aperitif)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+        ], [
+            'name.required' => 'Il nome è richiesto',
+        ]);
+
+        try {
+            $aperitif->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'price' => $request->price,
+            ]);
+
+            return redirect()->route('admin.aperitifs.index')->with('message', "$aperitif->name modificato con successo");
+        } catch (Exception $e) {
+
+            return redirect()->route('admin.aperitifs.index')->with('message', 'Errore nella modifica');
+        }
     }
 
     /**
@@ -62,6 +98,8 @@ class AperitifController extends Controller
      */
     public function destroy(Aperitif $aperitif)
     {
-        //
+        $aperitif->delete();
+
+        return back()->with('message', "$aperitif->name eliminato con successo");
     }
 }
