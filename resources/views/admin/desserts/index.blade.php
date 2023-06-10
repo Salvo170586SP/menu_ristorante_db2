@@ -24,7 +24,7 @@
                     <td>{{ $dessert->id }}</td>
                     <td>{{ $dessert->name }}</td>
                     <td>@if($dessert->description) {{ $dessert->description }} @else -- @endif</td>
-                    <td>€{{ $dessert->price }}</td>
+                    <td>@if($dessert->price) €{{ $dessert->price }} @else -- @endif</td>
                     <td>
                         <div class="flex justify-end">
                             <a href="{{ route('admin.desserts.show', $dessert->id) }}" class="rounded-lg shadow text-white p-2 bg-slate-500	">Vedi</a>
