@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dessert;
+use Exception;
 use Illuminate\Http\Request;
 
 class DessertController extends Controller
@@ -14,7 +15,6 @@ class DessertController extends Controller
     {
         $desserts = Dessert::all();
         return view('admin.desserts.index', compact('desserts'));
-
     }
 
     /**
@@ -22,7 +22,7 @@ class DessertController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.desserts.create');
     }
 
     /**
@@ -30,7 +30,25 @@ class DessertController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|unique:aperitifs',
+        ], [
+            'name.required' => 'Il nome è richiesto',
+            'name.unique' => 'Il nome è già esistente',
+        ]);
+
+        try {
+            $dessert = new Dessert();
+            $dessert->name = $request->name;
+            $dessert->description = $request->description;
+            $dessert->price = $request->price;
+            $dessert->save();
+
+            return redirect()->route('admin.desserts.index')->with('message', "$dessert->name creato con successo");;
+        } catch (Exception $e) {
+
+            return redirect()->route('admin.desserts.index')->with('message', 'Errore nella creazione');
+        }
     }
 
     /**
@@ -38,7 +56,7 @@ class DessertController extends Controller
      */
     public function show(Dessert $dessert)
     {
-        //
+        return view('admin.desserts.show', compact('dessert'));
     }
 
     /**
@@ -46,7 +64,7 @@ class DessertController extends Controller
      */
     public function edit(Dessert $dessert)
     {
-        //
+        return view('admin.desserts.edit', compact('dessert'));
     }
 
     /**
@@ -54,7 +72,24 @@ class DessertController extends Controller
      */
     public function update(Request $request, Dessert $dessert)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+        ], [
+            'name.required' => 'Il nome è richiesto',
+        ]);
+
+        try {
+            $dessert->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'price' => $request->price,
+            ]);
+
+            return redirect()->route('admin.desserts.index')->with('message', "$dessert->name modificato con successo");
+        } catch (Exception $e) {
+
+            return redirect()->route('admin.desserts.index')->with('message', 'Errore nella modifica');
+        }
     }
 
     /**
@@ -62,6 +97,8 @@ class DessertController extends Controller
      */
     public function destroy(Dessert $dessert)
     {
-        //
+        $dessert->delete();
+
+        return back()->with('message', "$dessert->name eliminato con successo");
     }
 }
