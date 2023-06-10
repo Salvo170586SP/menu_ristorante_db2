@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LongDrink;
+use Exception;
 use Illuminate\Http\Request;
 
 class LongDrinkController extends Controller
@@ -21,7 +22,7 @@ class LongDrinkController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.long_drinks.create');
     }
 
     /**
@@ -29,7 +30,25 @@ class LongDrinkController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|unique:aperitifs',
+        ], [
+            'name.required' => 'Il nome è richiesto',
+            'name.unique' => 'Il nome è già esistente',
+        ]);
+
+        try {
+            $long_drink = new LongDrink();
+            $long_drink->name = $request->name;
+            $long_drink->description = $request->description;
+            $long_drink->price = $request->price;
+            $long_drink->save();
+
+            return redirect()->route('admin.long_drinks.index')->with('message', "$long_drink->name creato con successo");;
+        } catch (Exception $e) {
+
+            return redirect()->route('admin.long_drinks.index')->with('message', 'Errore nella creazione');
+        }
     }
 
     /**
@@ -37,7 +56,7 @@ class LongDrinkController extends Controller
      */
     public function show(LongDrink $longDrink)
     {
-        //
+        return view('admin.long_drinks.show', compact('longDrink'));
     }
 
     /**
@@ -45,7 +64,7 @@ class LongDrinkController extends Controller
      */
     public function edit(LongDrink $longDrink)
     {
-        //
+        return view('admin.long_drinks.edit', compact('longDrink'));
     }
 
     /**
@@ -53,7 +72,24 @@ class LongDrinkController extends Controller
      */
     public function update(Request $request, LongDrink $longDrink)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+        ], [
+            'name.required' => 'Il nome è richiesto',
+        ]);
+
+        try {
+            $longDrink->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'price' => $request->price,
+            ]);
+
+            return redirect()->route('admin.long_drinks.index')->with('message', "$longDrink->name modificato con successo");
+        } catch (Exception $e) {
+
+            return redirect()->route('admin.long_drinks.index')->with('message', 'Errore nella modifica');
+        }
     }
 
     /**
@@ -61,6 +97,8 @@ class LongDrinkController extends Controller
      */
     public function destroy(LongDrink $longDrink)
     {
-        //
+        $longDrink->delete();
+
+        return back()->with('message', "$longDrink->name eliminato con successo");
     }
 }
