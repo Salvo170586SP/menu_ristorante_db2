@@ -23,6 +23,7 @@
                         <a href="{{ route('admin.white_wines.index') }}" class="bg-slate-400 hover:text-white  text-white p-2 rounded-lg">{{ __('Vini Bianchi') }}</a>
                         <a href="{{ route('admin.red_wines.index') }}" class="bg-slate-400 hover:text-white  text-white p-2 rounded-lg">{{ __('Vini Rossi') }}</a>
                         <a href="{{ route('admin.beers.index') }}" class="bg-slate-400 hover:text-white  text-white p-2 rounded-lg">{{ __('Birre') }}</a>
+                        <a href="{{ route('admin.bitter_drinks.index') }}" class="bg-slate-400 hover:text-white  text-white p-2 rounded-lg">{{ __('Amari') }}</a>
                     </div>
                 </div>
             </div>
