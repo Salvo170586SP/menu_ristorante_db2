@@ -5,7 +5,7 @@
     </div>
     <div class="flex flex-col pr-2">
         <label for="beer-name">CL</label>
-        <input type="text" class="rounded border-gray-400" value="{{ old('name', isset($beer) ? $beer->cl : '') }}" name="cl" id="beer-name">
+        <input type="text" class="rounded border-gray-400" value="{{ old('cl', isset($beer) ? $beer->cl : '') }}" name="cl" id="beer-name">
     </div>
 
     <div class="flex flex-col pl-2">
