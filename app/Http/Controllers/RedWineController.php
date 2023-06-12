@@ -32,7 +32,7 @@ class RedWineController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|unique:white_wines',
+            'name' => 'required|string|unique:red_wines',
         ], [
             'name.required' => 'Il nome è richiesto',
             'name.unique' => 'Il nome è già esistente',
