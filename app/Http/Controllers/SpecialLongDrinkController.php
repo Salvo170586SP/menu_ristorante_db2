@@ -31,7 +31,7 @@ class SpecialLongDrinkController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|unique:aperitifs',
+            'name' => 'required|string|unique:special_long_drinks',
         ], [
             'name.required' => 'Il nome è richiesto',
             'name.unique' => 'Il nome è già esistente',
