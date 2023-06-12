@@ -6,6 +6,7 @@ use App\Http\Controllers\InternationalLongDrinkController;
 use App\Http\Controllers\LongDrinkController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SpecialLongDrinkController;
+use App\Http\Controllers\WhiteWineController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,4 +52,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
     //InternationalLongDrinks
     Route::resource('/international_long_drinks',  InternationalLongDrinkController::class);
+
+    //WhiteWines
+    Route::resource('/white_wines',  WhiteWineController::class);
 });

@@ -7,6 +7,7 @@
     <div class="flex flex-col pl-2">
         <label for="internationalLongDrink-price">Prezzo</label>
         <input type="text" class="rounded border-gray-400" value="{{ old('price', isset($internationalLongDrink) ?  $internationalLongDrink->price : '') }}" id="long_drink-price" name="price">
+        <span class="text-sm">*decimali con il punto</span>
     </div>
 </div>
 <div class="flex flex-col">
