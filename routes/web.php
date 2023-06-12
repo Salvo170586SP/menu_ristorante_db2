@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AperitifController;
+use App\Http\Controllers\BeerController;
 use App\Http\Controllers\DessertController;
 use App\Http\Controllers\InternationalLongDrinkController;
 use App\Http\Controllers\LongDrinkController;
@@ -59,4 +60,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
     //Red Wines
     Route::resource('/red_wines',  RedWineController::class);
+
+    //Birre
+    Route::resource('/beers',  BeerController::class);
 });
