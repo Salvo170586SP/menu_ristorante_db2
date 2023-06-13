@@ -24,6 +24,7 @@
                         <a href="{{ route('admin.red_wines.index') }}" class="bg-slate-400 hover:text-white  text-white p-2 rounded-lg">{{ __('Vini Rossi') }}</a>
                         <a href="{{ route('admin.beers.index') }}" class="bg-slate-400 hover:text-white  text-white p-2 rounded-lg">{{ __('Birre') }}</a>
                         <a href="{{ route('admin.bitter_drinks.index') }}" class="bg-slate-400 hover:text-white  text-white p-2 rounded-lg">{{ __('Amari') }}</a>
+                        <a href="{{ route('admin.whiskies.index') }}" class="bg-slate-400 hover:text-white  text-white p-2 rounded-lg">{{ __('Whiskies') }}</a>
                     </div>
                 </div>
             </div>

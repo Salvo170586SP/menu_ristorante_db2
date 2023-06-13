@@ -9,6 +9,7 @@ use App\Http\Controllers\LongDrinkController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RedWineController;
 use App\Http\Controllers\SpecialLongDrinkController;
+use App\Http\Controllers\WhiskyController;
 use App\Http\Controllers\WhiteWineController;
 use Illuminate\Support\Facades\Route;
 
@@ -67,4 +68,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
     //Bitter Drinks
     Route::resource('/bitter_drinks',  BitterDrinkController::class);
+
+    //Whiskies
+    Route::resource('/whiskies',  WhiskyController::class);
 });
